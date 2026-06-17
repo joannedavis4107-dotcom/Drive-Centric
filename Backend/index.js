@@ -228,14 +228,13 @@ app.put("/api/test/:id", async (req, res) => {
   }
 });
   
-
-// app.use(express.static(path.join(__dirname, 'public', 'index.js')))
-// app.get('*', (req,res) => {
-//   res.sendFlie(path.join(__dirname, 'public', 'index.js'))
-// })
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'public')))
+app.get('*', (req,res) => {
+   res.sendFlie(path.join(__dirname, 'public', 'index.js')) })
 
 // server in listening mode
-const port = process.env.PORT || 3004;
-app.listen(port, '0.0.0.0' , () => {
-  console.log(`server is running in ${port}`);
+const PORT = process.env.PORT || 3004;
+app.listen(PORT, '0.0.0.0' , () => {
+  console.log(`server is running in ${PORT}`);
 });
