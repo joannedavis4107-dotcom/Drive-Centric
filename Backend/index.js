@@ -5,13 +5,12 @@ import Car from "./model/Car.js";
 import Testdrive from "./model/Testdrive.js";
 import cors from "cors"
 import mongoose from "mongoose";
-import path from 'path'
-import { fileURLToPath} from 'url'
+// import path from 'path'
+// import { fileURLToPath} from 'url'
 
 // initialize express
 var app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename)
+
 
 // middleware
 app.use(express.json());
@@ -229,14 +228,14 @@ app.put("/api/test/:id", async (req, res) => {
   }
 });
   
-const path =require('path');
-app.use(express.static(path.join(__dirname, 'public', 'index.js')))
-app.get('*', (req,res) => {
-  res.sendFlie(path.join(__dirname, 'public', 'index.js'))
-})
+
+// app.use(express.static(path.join(__dirname, 'public', 'index.js')))
+// app.get('*', (req,res) => {
+//   res.sendFlie(path.join(__dirname, 'public', 'index.js'))
+// })
 
 // server in listening mode
 const port = process.env.PORT || 3004;
-app.listen(port, () => {
+app.listen(port, '0.0.0.0' , () => {
   console.log(`server is running in ${port}`);
 });
