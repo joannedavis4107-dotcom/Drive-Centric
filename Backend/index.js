@@ -231,7 +231,7 @@ app.put("/api/test/:id", async (req, res) => {
   }
 });
   
-app.get('(.*)', (req,res) => {
+app.get('/{*splat}', (req,res) => {
    res.sendFlie(path.join(__dirname, 'public', 'index.js')) })
 
 // server in listening mode
