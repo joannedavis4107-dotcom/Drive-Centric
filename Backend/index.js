@@ -5,12 +5,19 @@ import Car from "./model/Car.js";
 import Testdrive from "./model/Testdrive.js";
 import cors from "cors"
 import mongoose from "mongoose";
+import path from 'path'
+import { fileURLToPath} from 'url'
+
 // initialize express
 var app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
 
 // middleware
 app.use(express.json());
 app.use(cors());
+
+
 
 // API to add data to db
 app.post("/api/auth/s", async (req, res) => {
@@ -221,7 +228,12 @@ app.put("/api/test/:id", async (req, res) => {
     console.log("error");
   }
 });
-    
+  
+const path =require('path');
+app.use(express.static(path.join(__dirname, 'public', 'index.js')))
+app.get('*', (req,res) => {
+  res.sendFlie(path.join(__dirname, 'public', 'index.js'))
+})
 
 // server in listening mode
 const port = process.env.PORT || 3004;
