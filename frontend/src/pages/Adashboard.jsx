@@ -3,6 +3,7 @@ import { Box, Button, Container, Divider, MenuItem, Paper, Table, TableBody, Tab
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const Adashboard = () => {
     const [cars, setCars] = useState([]);
@@ -23,7 +24,7 @@ const Adashboard = () => {
 
     const fetchBookings = async () =>{
         try {
-            const response = await axios.get('http://localhost:3004/api/test');
+            const response = await axios.get(`${API_URL}/api/test`);
             console.log("admin",response.date)
             if (response.data && Array.isArray(response.data)){
                 setBookings(response.data);
@@ -41,7 +42,7 @@ const Adashboard = () => {
 
    const fetchCars = async () => {
            try {
-               const response = await axios.get('http://localhost:3004/api/car');
+               const response = await axios.get(`${API_URL}/api/car`);
                if (response.data && Array.isArray(response.data))
                setCars(response.data);
            } catch (error) {
@@ -54,7 +55,7 @@ const Adashboard = () => {
     const handleDeleteCar = async (carId) => {
         if( window.confirm("Are you sure")){
             try {
-                await axios.delete(`http://localhost:3004/api/car/${carId}`);
+                await axios.delete(`${API_URL}/api/car/${carId}`);
                 setMessage("Car successfuly removed");
                 
                 setCars(cars.filter(car => car._id !== carId))
@@ -71,7 +72,7 @@ const Adashboard = () => {
             return;
         }
             try {
-                await axios.delete(`http://localhost:3004/api/booking/${bookingId}`);
+                await axios.delete(`${API_URL}/api/booking/${bookingId}`);
                 setBookings((prevBookings) => prevBookings.filter((b)=> b._id !== bookingId));
                 
                 // setTests(tests.filter(test => car._id !== carId))
@@ -89,7 +90,7 @@ const Adashboard = () => {
     const handleCarSubmit = async (e) =>{
         e.preventDefault();
         try {
-           await axios.post('http://localhost:3004/api/car', carForm);
+           await axios.post(`${API_URL}/api/car`, carForm);
            alert('car saved');
            setCarForm({
             modelName: '', variant: '', basePrice: '' , transmission: 'Automatic',
@@ -103,7 +104,7 @@ const Adashboard = () => {
 
     const handleStatusChange = async (id, newStatus) =>{
         try {
-            await axios.put(`http://localhost:3004/api/test/${id}`, { status: newStatus});
+            await axios.put(`${API_URL}/api/test/${id}`, { status: newStatus});
             alert('staus updated');
             fetchBookings();
         } catch (error) {
@@ -117,7 +118,7 @@ const Adashboard = () => {
             return;
         }
         try {
-            await axios.put(`http://localhost:3004/api/car/${carId}`,{
+            await axios.put(`${API_URL}/api/car/${carId}`,{
                 basePrice: Number(newPrice)
             });
             alert("vechile  price updated");

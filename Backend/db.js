@@ -5,5 +5,5 @@ const mongoURI = process.env.MONGODB_URI || "mongodb://test:test@ac-uegqbhu-shar
 mongoose.connect(mongoURI).then (()=>{
     console.log("connected to db")
 }).catch((err)=>{
-    console.groupCollapsed(err)
+    console.error("Database connection error:", err)
 })

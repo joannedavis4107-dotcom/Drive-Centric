@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material';
+import { API_URL } from '../config';
 
 
 const Home = ({ onNavigateToBooking }) => {
@@ -8,7 +9,7 @@ const Home = ({ onNavigateToBooking }) => {
     useEffect(() =>{
         const fetchCarsPreview = async () => {
             try {
-                 const response = await axios.get('http://localhost:3004/api/car');
+                 const response = await axios.get(`${API_URL}/api/car`);
                  if (response.data && Array.isArray(response.data)){
                     setFeaturedCars(response.data.slice(0,3));
                  }

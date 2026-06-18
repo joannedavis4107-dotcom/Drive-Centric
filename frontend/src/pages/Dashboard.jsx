@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Box, Button, Card, CardContent, Chip, Container, Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 import { CalendarToday, AccessTime, CancelOutlined } from '@mui/icons-material';
 
 const Dashboard = () => {
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
     const fetchCars = async () => {
         try {
-            const response = await axios.get('http://localhost:3004/api/car');
+            const response = await axios.get(`${API_URL}/api/car`);
             setCars(response.data);
         } catch (error) {
             console.log('error in fetching cars');
@@ -31,7 +32,7 @@ const Dashboard = () => {
             return;
         }
         try {
-            const response = await axios.get(`http://localhost:3004/api/mybook?name=${current}`);
+            const response = await axios.get(`${API_URL}/api/mybook?name=${current}`);
             if (response.data && Array.isArray(response.data)) {
                 setMyBookings(response.data);
             } else {
@@ -79,7 +80,7 @@ const Dashboard = () => {
             status: 'Pending'
         };
         try {
-            await axios.post('http://localhost:3004/api/test/book', payload);
+            await axios.post(`${API_URL}/api/test/book`, payload);
             alert(`Test drive booking for the ${selectedCar.modelName} submitted successfully`);
             setBookingForm({ date: '', time: '10:00 AM', totalEstimatedPrice: '' });
             setSelectedCar(null);
@@ -95,7 +96,7 @@ const Dashboard = () => {
             return;
         }
         try {
-            await axios.delete(`http://localhost:3004/api/booking/${bookingId}`);
+            await axios.delete(`${API_URL}/api/booking/${bookingId}`);
             alert("Booking cancelled successfully.");
             fetchMyBookings();
         } catch (error) {

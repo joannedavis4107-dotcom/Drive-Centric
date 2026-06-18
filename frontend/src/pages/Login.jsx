@@ -2,6 +2,7 @@ import { Box, Button, Container, MenuItem, TextField, Typography } from "@mui/ma
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
       return;
     }
     try{ 
-    const response = await axios.post('http://localhost:3004/api/login', {name, password, role: role});
+    const response = await axios.post(`${API_URL}/api/login`, {name, password, role: role});
     if (response.data.token) {
       localStorage.setItem('token', response.data.token);
     }

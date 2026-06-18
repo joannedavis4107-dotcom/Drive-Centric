@@ -1,0 +1,12 @@
+{
+  "name": "drive-centric-app",
+  "version": "1.0.0",
+  "description": "Drive-Centric App with unified frontend/backend deployment",
+  "scripts": {
+    "install-frontend": "npm install --prefix frontend",
+    "install-backend": "npm install --prefix Backend",
+    "build-frontend": "npm run build --prefix frontend",
+    "build": "npm run install-frontend && npm run build-frontend && npm run install-backend",
+    "start": "node Backend/index.js"
+  }
+}

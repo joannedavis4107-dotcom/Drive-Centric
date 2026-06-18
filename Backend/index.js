@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename)
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 
 
@@ -231,8 +231,9 @@ app.put("/api/test/:id", async (req, res) => {
   }
 });
   
-app.get('/{*splat}', (req,res) => {
-   res.sendFlie(path.join(__dirname, 'public', 'index.js')) })
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 // server in listening mode
 const PORT = process.env.PORT || 3004;
