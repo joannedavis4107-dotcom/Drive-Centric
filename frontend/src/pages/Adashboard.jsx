@@ -25,7 +25,7 @@ const Adashboard = () => {
     const fetchBookings = async () =>{
         try {
             const response = await axios.get(`${API_URL}/api/test`);
-            console.log("admin",response.date)
+            console.log("admin",response.data)
             if (response.data && Array.isArray(response.data)){
                 setBookings(response.data);
             } else {

@@ -28,7 +28,8 @@ app.post("/api/auth/s", async (req, res) => {
     await newUser.save();
     res.send("Account created succesfully");
   } catch (error) {
-    console.log(error);
+    console.error("Error creating user:", error);
+    res.status(500).send("Internal server error during registration");
   }
 });
 
@@ -85,7 +86,8 @@ app.post('/api/car', async(req, res) =>{
     await newCar.save();
     res.send("car saved");
   } catch (error) {
-    console.log("error");
+    console.error("Error saving car:", error);
+    res.status(500).send("Error saving car");
   }
 });
 
@@ -137,7 +139,8 @@ app.get("/api/test", async (req, res) => {
     }));
     res.json(allBookings);
   } catch (error) {
-    console.log("error")
+    console.error("Error fetching test drive bookings:", error);
+    res.status(500).send("Error fetching bookings");
   }
 });
 app.post("/api/test/book", async (req, res) => {
@@ -227,7 +230,8 @@ app.put("/api/test/:id", async (req, res) => {
     await Testdrive.findByIdAndUpdate(req.params.id, req.body);
     res.send("data updated");
   } catch (error) {
-    console.log("error");
+    console.error("Error updating test drive:", error);
+    res.status(500).send("Error updating test drive");
   }
 });
   
